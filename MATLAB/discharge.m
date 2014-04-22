@@ -1,6 +1,6 @@
 function [ F,excess,seen,height ] = discharge( C, F, excess, height, seen, u, n, INF )
     while (excess(u) > 0)
-        if (seen(u) < n)
+        if (seen(u) < n+1)
           v = seen(u);
           if (v == 0)
             v = 1;
@@ -11,7 +11,7 @@ function [ F,excess,seen,height ] = discharge( C, F, excess, height, seen, u, n,
             seen(u) = seen(u) + 1;
           end
         else
-          height = relabel(C, F, height, u, INF, n);
+          [height] = relabel(C, F, height, u, INF, n);
           seen(u) = 1;
         end
     end

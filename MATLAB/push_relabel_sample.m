@@ -16,7 +16,7 @@ F = zeros(n);
     [F,excess] = push(C, F, excess, 1, i);
   end
   p = 1;
-  while (p <= n - 2 && p >= 1)
+  while (p < n - 1)
      u = list(p);
      old_height = height(u);
      [ F,excess,seen,height ] = discharge(C, F, excess, height, seen, u, n, INF);
