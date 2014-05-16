@@ -1,18 +1,19 @@
-%sample data
-capacities = zeros(6);
-   capacities(1,2) = 2;
-   capacities(1,3) = 9;
-   capacities(2,3) = 1;
-   capacities(2,4) = 0;
-   capacities(2,5) = 0;
-   capacities(3,5) = 7;
-   capacities(4,6) = 7;
-   capacities(5,6) = 4;
-flows = zeros(6);
-
+%data read and copy to defined structures
+out_file_path ='flow_out.txt';
 [E,n,q] = read_data('out.txt');
+capacities = zeros(n);
+for i=1:q
+    capacities(E{i,1},E{i,2}) = E{i,3};
+end
 
-%max_flow = push_relabel(capacities,E,n,q);
-n = 6;
-max_flow = push_relabel_sample(capacities,E,n);
+tic;
+[max_flow, flows] = push_relabel(capacities,n);
+display('Czas wykonania: ');
+time = toc
+
+%display and save to file
+display('Maksymalny przeplyw');
 display(max_flow);
+display('Przeplywy krawedzi');
+display(flows);
+save_data(out_file_path, time, max_flow, flows);
