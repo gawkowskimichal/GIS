@@ -38,6 +38,7 @@ catch err
     display('Linia 4: n numer_wierzcho³ka_pocz¹tkowego s');
     display('Linia 5: n numer_wierzcho³ka_koñcowego t');
     display('Linia 6 i kolejne: a numer_wierzcho³ka_pocz¹tkowego_krawêdzi numer_wierzcho³ka_koñcowego_krawêdzi przepustowoœæ_krawêdzi');
+    return;
 end
 end
 

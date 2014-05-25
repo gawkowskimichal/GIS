@@ -3,6 +3,13 @@ function [] = main (path, flag)
 %data read and copy to defined structures
 out_file_path ='flow_out.txt';
 [E,n,q] = read_data(path);
+path_exists = DFS(E,n,1,n);
+if path_exists
+    display('Œcie¿ka od Ÿród³a do ujœcia istnieje!');
+else
+    display('Œcie¿ka od Ÿród³a do ujœcia NIE istnieje!');
+    return;
+end
 capacities = zeros(n);
 for i=1:q
     capacities(E{i,1},E{i,2}) = E{i,3};
