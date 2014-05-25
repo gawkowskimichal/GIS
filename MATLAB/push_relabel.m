@@ -1,4 +1,4 @@
-function [ max_flow, F ] = push_relabel( C, n )
+function [ max_flow, F, height ] = push_relabel( C, n)
 INF = 20;
 F = zeros(n);
  excess = zeros(1,n);

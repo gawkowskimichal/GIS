@@ -7,4 +7,3 @@ function [ height ] = relabel( C, F, height, u, INF, n  )
     end
   end
 end
-
