@@ -1,8 +1,8 @@
-function [] = main (flag)
+function [] = main (path, flag)
 
 %data read and copy to defined structures
 out_file_path ='flow_out.txt';
-[E,n,q] = read_data('out.txt');
+[E,n,q] = read_data(path);
 capacities = zeros(n);
 for i=1:q
     capacities(E{i,1},E{i,2}) = E{i,3};
