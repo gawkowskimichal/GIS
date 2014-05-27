@@ -1,9 +1,13 @@
 #include <stdlib.h>
-#include <stdio.h>
+#include <iostream>
+#include "read_data.h"
 
-#define NODES 6
+using namespace std;
+
 #define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
 #define INFINITE 10000000
+
+int nodes;
 
 void push(const int * const * C, int ** F, int *excess, int u, int v) {
   int send = MIN(excess[u], C[u][v] - F[u][v]);
@@ -16,7 +20,7 @@ void push(const int * const * C, int ** F, int *excess, int u, int v) {
 void relabel(const int * const * C, const int * const * F, int *height, int u) {
   int v;
   int min_height = INFINITE;
-  for (v = 0; v < NODES; v++) {
+  for (v = 0; v < nodes; v++) {
     if (C[u][v] - F[u][v] > 0) {
       min_height = MIN(min_height, height[v]);
       height[u] = min_height + 1;
@@ -26,7 +30,7 @@ void relabel(const int * const * C, const int * const * F, int *height, int u) {
 
 void discharge(const int * const * C, int ** F, int *excess, int *height, int *seen, int u) {
   while (excess[u] > 0) {
-    if (seen[u] < NODES) {
+    if (seen[u] < nodes) {
       int v = seen[u];
       if ((C[u][v] - F[u][v] > 0) && (height[u] > height[v])){
     push(C, F, excess, u, v);
@@ -52,25 +56,25 @@ void moveToFront(int i, int *A) {
 int pushRelabel(const int * const * C, int ** F, int source, int sink) {
   int *excess, *height, *list, *seen, i, p;
 
-  excess = (int *) calloc(NODES, sizeof(int));
-  height = (int *) calloc(NODES, sizeof(int));
-  seen = (int *) calloc(NODES, sizeof(int));
+  excess = (int *) calloc(nodes, sizeof(int));
+  height = (int *) calloc(nodes, sizeof(int));
+  seen = (int *) calloc(nodes, sizeof(int));
 
-  list = (int *) calloc((NODES-2), sizeof(int));
+  list = (int *) calloc((nodes-2), sizeof(int));
 
-  for (i = 0, p = 0; i < NODES; i++){
+  for (i = 0, p = 0; i < nodes; i++){
     if((i != source) && (i != sink)) {
       list[p] = i;
       p++;
     }
   }
 
-  height[source] = NODES;
+  height[source] = nodes;
   excess[source] = INFINITE;
-  for (i = 0; i < NODES; i++)
+  for (i = 0; i < nodes; i++)
     push(C, F, excess, source, i);
   p = 0;
-   while (p < NODES - 2) {
+   while (p < nodes - 2) {
      int u = list[p];
      int old_height = height[u];
      discharge(C, F, excess, height, seen, u);
@@ -82,7 +86,7 @@ int pushRelabel(const int * const * C, int ** F, int source, int sink) {
        p += 1;
    }
    int maxflow = 0;
-   for (i = 0; i < NODES; i++)
+   for (i = 0; i < nodes; i++)
      maxflow += F[source][i];
 
    free(list);
@@ -96,38 +100,28 @@ int pushRelabel(const int * const * C, int ** F, int source, int sink) {
 
  void printMatrix(const int * const * M) {
    int i,j;
-   for (i = 0; i < NODES; i++) {
-     for (j = 0; j < NODES; j++)
-       printf("%d\t",M[i][j]);
-     printf("\n");
+   for (i = 0; i < nodes; i++) {
+     for (j = 0; j < nodes; j++)
+       cout << M[i][j] << "\t";
+     cout << endl;
    }
  }
 
- int main(void) {
-   int **flow, **capacities, i;
-   flow = (int **) calloc(NODES, sizeof(int*));
-   capacities = (int **) calloc(NODES, sizeof(int*));
-   for (i = 0; i < NODES; i++) {
-     flow[i] = (int *) calloc(NODES, sizeof(int));
-     capacities[i] = (int *) calloc(NODES, sizeof(int));
-   }
+ int main(int argc, char *argv[]) {
+	 if (argc != 3) {
+		 cout << "Program uruchomiony z niepoprawną liczbą argumentów." << endl;
+		 cout << "Poprawne wywołanie 'GIS ścieżka_do_pliku flaga'" << endl;
+		 return 0;
+	 }
+	 int **flow, **capacities;
+	 read_data(flow, capacities, nodes, "out.txt");
 
-   //Sample graph
-   capacities[0][1] = 2;
-   capacities[0][2] = 9;
-   capacities[1][2] = 1;
-   capacities[1][3] = 0;
-   capacities[1][4] = 0;
-   capacities[2][4] = 7;
-   capacities[3][5] = 7;
-   capacities[4][5] = 4;
-
-   printf("Capacity:\n");
+   cout << "Capacity:" << endl;
    printMatrix(capacities);
 
-   printf("Max Flow:\n%d\n", pushRelabel(capacities, flow, 0, 5));
+   cout << "Max Flow:" << endl << pushRelabel(capacities, flow, 0, 5) << endl;
 
-   printf("Flows:\n");
+   cout << "Flows:" << endl;
    printMatrix(flow);
 
    return 0;
