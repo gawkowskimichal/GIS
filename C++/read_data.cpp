@@ -30,7 +30,6 @@ void read_data(int **& flow, int **& capacities, int & nodes, char * file) {
 			}
 			else if (split_line[0] == "p") {
 				nodes = atoi(split_line[2].c_str());
-				cout << nodes << endl;
 				flow = (int **) calloc(nodes, sizeof(int*));
 				capacities = (int **) calloc(nodes, sizeof(int*));
 					   for (int i = 0; i < nodes; i++) {
@@ -51,7 +50,7 @@ void read_data(int **& flow, int **& capacities, int & nodes, char * file) {
 		}
 	}
 	else {
-		cout << "Nie można otworzyć pliku out.txt" << endl;
+		cout << "Nie można otworzyć pliku " << file << endl;
 		exit(0);
 	}
 	//exit();

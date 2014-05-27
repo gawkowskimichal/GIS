@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "read_data.h"
+#include "dfs.h"
 
 using namespace std;
 
@@ -114,12 +115,23 @@ int pushRelabel(const int * const * C, int ** F, int source, int sink) {
 		 return 0;
 	 }
 	 int **flow, **capacities;
-	 read_data(flow, capacities, nodes, "out.txt");
+	 read_data(flow, capacities, nodes, argv[1]);
+	 bool path_exists = dfs(capacities, nodes);
+	 if (path_exists) {
+	   	cout << "Ścieżka istnieje" << endl;
+	 }
+	 else {
+	   	cout << "Ścieżka nie istnieje" << endl;
+	   	return 0;
+	 }
+
 
    cout << "Capacity:" << endl;
    printMatrix(capacities);
 
-   cout << "Max Flow:" << endl << pushRelabel(capacities, flow, 0, 5) << endl;
+
+
+   cout << "Max Flow:" << endl << pushRelabel(capacities, flow, 0, 10) << endl;
 
    cout << "Flows:" << endl;
    printMatrix(flow);
