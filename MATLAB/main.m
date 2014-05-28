@@ -22,13 +22,10 @@ else
 [max_flow, flows, height] = push_relabel_highest_label(capacities,n);
 end
 time = toc;
-display(height);
 %display and save to file
 display('Czas wykonania: ');
 display(time);
 display('Maksymalny przeplyw');
 display(max_flow);
-display('Przeplywy krawedzi');
-display(flows);
 save_data(out_file_path, time, max_flow, flows);
 end

@@ -1,5 +1,5 @@
 function [ max_flow, F, height ] = push_relabel_highest_label( C, n )
-INF = 20000;
+INF = 200000;
 F = zeros(n);
  excess = zeros(1,n);
   height = zeros(1,n);
