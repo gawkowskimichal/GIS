@@ -59,7 +59,7 @@ int pushRelabelHighestLabel(const int * const * C, int ** F, int source, int sin
 	bool activeNodes = true;
 	while (activeNodes) {
 		activeNodes = false;
-		for (i = 1; i < nodes - 2; i++) {
+		for (i = 1; i < nodes - 1; i++) {
 			if (excess[i] > 0) {
 				activeNodes = true;
 			}
