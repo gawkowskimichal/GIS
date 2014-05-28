@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sys/time.h>
 
 using namespace std;
 
@@ -36,20 +37,34 @@ void printMatrix(const int * const * M, int nodes) {
 	   	return 0;
 	 }
 
-	 cout << "Capacity:" << endl;
+	 cout << "Przepustowości:" << endl;
 	 printMatrix(capacities, nodes);
-
+	 int maxFlow;
+	 struct timeval time;
+	 double startTime, endTime, executionTime;
 	 if (*option == '1') {
-		 cout << "Podstawowa wersja algorytmu 'push-relabel'" << endl;
-		 cout << "Max Flow:" << endl << pushRelabel(capacities, flow, 0, nodes - 1, nodes) << endl;
+		 cout << "Podstawowa wersja algorytmu 'push-relabel'." << endl;
+		 gettimeofday(&time, NULL);
+		 startTime = time.tv_sec * 1000.0 + time.tv_usec / 1000.0;
+		 maxFlow = pushRelabel(capacities, flow, 0, nodes - 1, nodes);
+		 gettimeofday(&time, NULL);
+		 endTime = time.tv_sec * 1000.0 + time.tv_usec / 1000.0;
 	 }
 	 else {
-		 cout << "Wersja algorytmu 'push-relabel', gdzie zastosowano regułę 'highest label selection rule'" << endl;
-		 cout << "Max Flow:" << endl << pushRelabelHighestLabel(capacities, flow, 0, nodes - 1, nodes) << endl;
+		 cout << "Wersja algorytmu 'push-relabel', gdzie zastosowano regułę 'highest label selection rule'." << endl;
+		 gettimeofday(&time, NULL);
+		 startTime = time.tv_sec * 1000.0+ time.tv_usec/1000.0;
+		 maxFlow = pushRelabelHighestLabel(capacities, flow, 0, nodes - 1, nodes);
+		 gettimeofday(&time, NULL);
+		 endTime = time.tv_sec * 1000.0 + time.tv_usec / 1000.0;
 	 }
+	 executionTime = endTime - startTime;
 
-	 cout << "Flows:" << endl;
+	 cout << "Przepływy:" << endl;
 	 printMatrix(flow, nodes);
+
+	 cout << "Maksymalny przepływ:" << endl << maxFlow << endl;
+	 cout << "Wykonanie algorytmu zajęło " << executionTime << " milisekund." << endl;
 
 	 return 0;
  }
