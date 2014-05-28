@@ -6,30 +6,30 @@
 
 using namespace std;
 
-void read_data(int **& flow, int **& capacities, int & nodes, char * file) {
+void readData(int **& flow, int **& capacities, int & nodes, char * file) {
 	string line;
-	ifstream input_file(file);
-	if (input_file.is_open()) {
-		while (getline(input_file,line)) {
+	ifstream inputFile(file);
+	if (inputFile.is_open()) {
+		while (getline(inputFile,line)) {
 			//cout << line << endl;
 			int pos = line.find(' ');
-			int initial_pos = 0;
-			vector<string> split_line;
+			int initialPos = 0;
+			vector<string> splitLine;
 			while (pos != string::npos) {
-				split_line.push_back(line.substr(initial_pos, pos - initial_pos));
-				initial_pos = pos + 1;
-				pos = line.find(' ', initial_pos);
+				splitLine.push_back(line.substr(initialPos, pos - initialPos));
+				initialPos = pos + 1;
+				pos = line.find(' ', initialPos);
 			}
-			split_line.push_back(line.substr(initial_pos));
-			/*for (std::vector<string>::iterator i = split_line.begin(); i != split_line.end(); ++i) {
+			splitLine.push_back(line.substr(initialPos));
+			/*for (std::vector<string>::iterator i = splitLine.begin(); i != splitLine.end(); ++i) {
 				cout << *i << endl;
 			}*/
-			//cout << split_line[0] << endl;
-			if (split_line[0].compare("c") == 0) {
+			//cout << splitLine[0] << endl;
+			if (splitLine[0].compare("c") == 0) {
 				continue;
 			}
-			else if (split_line[0] == "p") {
-				nodes = atoi(split_line[2].c_str());
+			else if (splitLine[0] == "p") {
+				nodes = atoi(splitLine[2].c_str());
 				flow = (int **) calloc(nodes, sizeof(int*));
 				capacities = (int **) calloc(nodes, sizeof(int*));
 					   for (int i = 0; i < nodes; i++) {
@@ -37,11 +37,11 @@ void read_data(int **& flow, int **& capacities, int & nodes, char * file) {
 					     capacities[i] = (int *) calloc(nodes, sizeof(int));
 					   }
 			}
-			else if (split_line[0] == "n") {
+			else if (splitLine[0] == "n") {
 
 			}
-			else if (split_line[0] == "a") {
-				capacities[atoi(split_line[1].c_str()) - 1][atoi(split_line[2].c_str()) - 1] = atoi(split_line[3].c_str());
+			else if (splitLine[0] == "a") {
+				capacities[atoi(splitLine[1].c_str()) - 1][atoi(splitLine[2].c_str()) - 1] = atoi(splitLine[3].c_str());
 			}
 			else {
 				//cout << "Niepoprawny format pliku wejściowego." << endl;
