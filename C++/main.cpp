@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <sys/time.h>
 
 using namespace std;
@@ -37,8 +38,8 @@ void printMatrix(const int * const * M, int nodes) {
 	   	return 0;
 	 }
 
-	 cout << "Przepustowości:" << endl;
-	 printMatrix(capacities, nodes);
+	 //cout << "Przepustowości:" << endl;
+	 //printMatrix(capacities, nodes);
 	 int maxFlow;
 	 struct timeval time;
 	 double startTime, endTime, executionTime;
@@ -60,8 +61,15 @@ void printMatrix(const int * const * M, int nodes) {
 	 }
 	 executionTime = endTime - startTime;
 
-	 cout << "Przepływy:" << endl;
-	 printMatrix(flow, nodes);
+	 //cout << "Przepływy:" << endl;
+	 //printMatrix(flow, nodes);
+
+	 ofstream outputFile;
+	 outputFile.open("results.txt", std::ios_base::app);
+	 outputFile << "Option: " << *option << endl;
+	 outputFile << "Maksymalny przepływ:" << endl << maxFlow << endl;
+	 outputFile << "Wykonanie algorytmu zajęło " << executionTime << " milisekund." << endl << endl;
+	 outputFile.close();
 
 	 cout << "Maksymalny przepływ:" << endl << maxFlow << endl;
 	 cout << "Wykonanie algorytmu zajęło " << executionTime << " milisekund." << endl;

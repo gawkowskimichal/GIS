@@ -1,4 +1,5 @@
 #include <stdlib.h>
+//#include <iostream>
 
 #define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
 #define INFINITE 10000000
@@ -6,9 +7,12 @@
 void push(const int * const * C, int ** F, int *excess, int u, int v);
 
 void relabelHighestLabel(const int * const * C, const int * const * F, int *height, int u, int nodes, int * excess, int & highestLabelIndex) {
-  int v;
+	//std::cout << "relabelHighestLabel" << std::endl;
+	int v;
   int min_height = INFINITE;
   for (v = 0; v < nodes; v++) {
+	  //std::cout << "relabelHighestLabel v:" << v  << std::endl;
+	  //std::cout << "relabelHighestLabel u:" << u  << std::endl;
     if (C[u][v] - F[u][v] > 0) {
       min_height = MIN(min_height, height[v]);
       height[u] = min_height + 1;
@@ -17,10 +21,12 @@ void relabelHighestLabel(const int * const * C, const int * const * F, int *heig
       }
     }
   }
+  //std::cout << "end - relabelHighestLabel" << std::endl;
 }
 
 void dischargeHighestLabel(const int * const * C, int ** F, int *excess, int *height, int *seen, int u, int nodes, int & highestLabelIndex) {
-  while (excess[u] > 0) {
+	//std::cout << "dischargeHighestLabel" << std::endl;
+	while (excess[u] > 0) {
     if (seen[u] < nodes) {
       int v = seen[u];
       if ((C[u][v] - F[u][v] > 0) && (height[u] > height[v])){
@@ -38,7 +44,7 @@ void dischargeHighestLabel(const int * const * C, int ** F, int *excess, int *he
 
 int pushRelabelHighestLabel(const int * const * C, int ** F, int source, int sink, int nodes) {
 	int *excess, *height, *list, *seen, i, p;
-
+	//std::cout << "pushRelabelHighestLabel" << std::endl;
 	excess = (int *) calloc(nodes, sizeof(int));
 	height = (int *) calloc(nodes, sizeof(int));
 	seen = (int *) calloc(nodes, sizeof(int));
@@ -65,8 +71,8 @@ int pushRelabelHighestLabel(const int * const * C, int ** F, int source, int sin
 			}
 		}
 		if (excess[highestLabelIndex] <= 0) {
-			highestLabelIndex = nodes;
-			for (int j = nodes - 2; j > 1; j--) {
+			highestLabelIndex = nodes - 1;
+			for (int j = nodes - 2; j >= 1; j--) {
 				if (excess[j] > 0 && height[j] >= height[highestLabelIndex]) {
 					highestLabelIndex = j;
 				}
