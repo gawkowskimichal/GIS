@@ -1,18 +1,16 @@
 #include <stdlib.h>
-//#include <iostream>
 
 #define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
 #define INFINITE 10000000
 
 void push(const int * const * C, int ** F, int *excess, int u, int v);
 
+//operacja relabel w wersij algorytmu z wyborem wierzchołka aktywnego
+//dodatkowo odpowiada za wybór wierzchołka aktywnego o najwyższej etykiecie
 void relabelHighestLabel(const int * const * C, const int * const * F, int *height, int u, int nodes, int * excess, int & highestLabelIndex) {
-	//std::cout << "relabelHighestLabel" << std::endl;
-	int v;
+  int v;
   int min_height = INFINITE;
   for (v = 0; v < nodes; v++) {
-	  //std::cout << "relabelHighestLabel v:" << v  << std::endl;
-	  //std::cout << "relabelHighestLabel u:" << u  << std::endl;
     if (C[u][v] - F[u][v] > 0) {
       min_height = MIN(min_height, height[v]);
       height[u] = min_height + 1;
@@ -21,11 +19,11 @@ void relabelHighestLabel(const int * const * C, const int * const * F, int *heig
       }
     }
   }
-  //std::cout << "end - relabelHighestLabel" << std::endl;
 }
 
+//operacja discharge - modyfikuje wierzchołek aktywny aplikujac na nim operacje push i relabel
+//aż do momentu, gdy stanie się on nieaktywny, wtedy aplikuje
 void dischargeHighestLabel(const int * const * C, int ** F, int *excess, int *height, int *seen, int u, int nodes, int & highestLabelIndex) {
-	//std::cout << "dischargeHighestLabel" << std::endl;
 	while (excess[u] > 0) {
     if (seen[u] < nodes) {
       int v = seen[u];
@@ -41,14 +39,16 @@ void dischargeHighestLabel(const int * const * C, int ** F, int *excess, int *he
   }
 }
 
-
+//algorytm push-relabel w wersji z wyborem wierzchołka aktywnego o najwyższej etykiecie
 int pushRelabelHighestLabel(const int * const * C, int ** F, int source, int sink, int nodes) {
 	int *excess, *height, *list, *seen, i, p;
-	//std::cout << "pushRelabelHighestLabel" << std::endl;
-	excess = (int *) calloc(nodes, sizeof(int));
-	height = (int *) calloc(nodes, sizeof(int));
-	seen = (int *) calloc(nodes, sizeof(int));
-	list = (int *) calloc((nodes-2), sizeof(int));
+	excess = (int *) calloc(nodes, sizeof(int)); //wektor zawierający informację
+  	  	  	  	  	  	  	  	  	  	  	  	  //o aktualnym stanie nasycenia wierzchołka
+	height = (int *) calloc(nodes, sizeof(int)); //wektor zawierający oznaczenia ‘wysokości’ wierzchołków
+	seen = (int *) calloc(nodes, sizeof(int)); //wektor kontrolujący liczbę prób przesunięcia
+  	  	  	  	  	  	  	  	  	  	  	  //przepływu do sąsiednich wierzchołków
+	list = (int *) calloc((nodes-2), sizeof(int)); //wektor indeksów wierzchołków zawierający
+	  	  	  	  	  	  	  	  	  	  	  	  //wszystkie indeksy, poza indeksami źródła i ujścia
 	int highestLabelIndex = 1;
 
 	for (i = 0, p = 0; i < nodes; i++) {

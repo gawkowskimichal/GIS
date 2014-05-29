@@ -9,6 +9,7 @@ void readData(int **& flow, int **& capacities, int & nodes, char * file);
 int pushRelabelHighestLabel(const int * const * C, int ** F, int source, int sink, int nodes);
 int pushRelabel(const int * const * C, int ** F, int source, int sink, int nodes);
 
+//funkcja wypisując na standardowe wyjście macierze: przepustowości i przepływów
 void printMatrix(const int * const * M, int nodes) {
 	int i,j;
 	for (i = 0; i < nodes; i++) {

@@ -12,6 +12,8 @@ void visit_node(int **&capacities, int start, int stop, bool & path_exists) {
 	}
 }
 
+//funkcja przeglądająca graf wgłąb, która służy do określania
+//czy pomiędzy źródłem i ujściem istnieje ścieżka
 bool dfs(int **& capacities, int nodes) {
 	bool path_exists = false;
 	visit_node(capacities, 0, nodes - 1, path_exists);

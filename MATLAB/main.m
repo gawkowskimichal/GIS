@@ -25,7 +25,7 @@ time = toc;
 %display(height);
 %display and save to file
 display('Czas wykonania: ');
-display(time);
+display(time * 1000);
 display('Maksymalny przeplyw');
 display(max_flow);
 %display('Przeplywy krawedzi');

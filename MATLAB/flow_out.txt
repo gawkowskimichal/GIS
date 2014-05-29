@@ -1,8 +1,12 @@
-
+Option: 1
+Czas wykonania: 
+23.960000
+Maksymalny przeplyw: 
+190
 
 Option: 1
 Czas wykonania: 
-168071.978000
+4.842000
 Maksymalny przeplyw: 
-235128
+190
 
