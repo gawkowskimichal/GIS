@@ -1,4 +1,6 @@
 function [ max_flow, F, height ] = push_relabel( C, n)
+%push_relabel - implementacja algorytmu push-relabel w wersji podstawowej z
+%wykorzystaniem struktury danych 'current-edge' i operacji 'discharge'
 INF = 3000000;
 F = zeros(n);
  excess = zeros(1,n);

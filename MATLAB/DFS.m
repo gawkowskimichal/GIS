@@ -1,5 +1,7 @@
-% DFS (kraw�dzie, liczba wierzcho�k�w, start, stop) (od pierwszego do ostatniego)
+% DFS (kraw�dzie, liczba wierzcho�k�w, start, stop) (od pierwszego do ostatniego)
 function [ path_exists ] = DFS( E, n, s, d)
+%DFS - funkcja przeglądająca graf wgłąb, która służy do określania
+%czy pomiędzy źródłem i ujściem istnieje ścieżka
 path_exists = 0;
 if s == d
     path_exists = true;

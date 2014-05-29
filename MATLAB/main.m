@@ -1,7 +1,7 @@
 function [] = main (path, flag)
-
-%data read and copy to defined structures
+%program wyznaczający maksymalny przepływ w sieci przepływowej
 out_file_path ='flow_out.txt';
+%dane czytane i kopiowane do odpowiednich struktur
 [E,n,q] = read_data(path);
 %path_exists = DFS(E,n,1,n);
 %if path_exists

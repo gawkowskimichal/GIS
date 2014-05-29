@@ -1,4 +1,6 @@
 function [ height, max_height_index ] = relabel_highest_label( C, F, height, u, INF, n, excess, max_height_index  )
+% relabel_highest_label - operacja relabel w wersij algorytmu z wyborem wierzchołka aktywnego
+%dodatkowo odpowiada za wybór wierzchołka aktywnego o najwyższej etykiecie
   min_height = INF;
   for v=1:n
     if (C(u,v) - F(u,v) > 0) 

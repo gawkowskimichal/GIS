@@ -1,9 +1,11 @@
 function [] = save_data( path, time, max_flow, flows, flag )
+%save_data - funkcja zapisująca do pliku tekstowego 
+%informacje o wynikach wykonania algorytmu 
 fid = fopen(path,'at+');
 fprintf(fid,'Option: ');
 fprintf(fid,'%s\n', flag);
 fprintf(fid,'Czas wykonania: \n');
-fprintf(fid,'%f\n',time * 1000);  % The format string is applied to each element of a
+fprintf(fid,'%f\n',time * 1000);
 fprintf(fid,'Maksymalny przeplyw: \n');
 fprintf(fid,'%d\n\n',max_flow);
 %fprintf(fid,'Przeplywy krawedzi: \n');

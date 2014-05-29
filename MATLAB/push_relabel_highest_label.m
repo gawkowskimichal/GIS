@@ -1,4 +1,5 @@
 function [ max_flow, F, height ] = push_relabel_highest_label( C, n )
+%push_relabel_highest_label - algorytm push-relabel w wersji z wyborem wierzchołka aktywnego o najwyższej etykiecie
 INF = 3000000;
 F = zeros(n);
  excess = zeros(1,n);

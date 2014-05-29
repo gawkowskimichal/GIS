@@ -1,4 +1,6 @@
 function [ E, nV, nE ] = read_data( nazwa_pliku )
+%read_data - //funkcja odczytujÄ…ca z pliku tekstowego dane opisujÄ…ce
+%sieÄ‡, w ktÃ³rej wyznaczany bÄ™dzie maksymalny przepÅ‚yw
 try
     E = {10000,4}; % we must succed!
     nV = 0;
@@ -29,15 +31,15 @@ try
     E = E();
     end
 catch err
-    display('Nast¹pi³ b³¹d przy odczytywaniu pliku wejœciowego.');
-    display('Plik wejœciowy nie istnieje, lub ma z³¹ strukturê.');
-    display('Plik wejœciowy powinien mieæ nastêpuj¹c¹ strukturê:');
+    display('Nastï¿½piï¿½ bï¿½ï¿½d przy odczytywaniu pliku wejï¿½ciowego.');
+    display('Plik wejï¿½ciowy nie istnieje, lub ma zï¿½ï¿½ strukturï¿½.');
+    display('Plik wejï¿½ciowy powinien mieï¿½ nastï¿½pujï¿½cï¿½ strukturï¿½:');
     display('Linia 1: c Opis grafu');
-    display('Linia 2: c Opis parametrów podanych w celu wytworzenia grafu');
-    display('Linia 3: p kod_rodzaju liczba_wierzcho³ków liczba_krawêdzie');
-    display('Linia 4: n numer_wierzcho³ka_pocz¹tkowego s');
-    display('Linia 5: n numer_wierzcho³ka_koñcowego t');
-    display('Linia 6 i kolejne: a numer_wierzcho³ka_pocz¹tkowego_krawêdzi numer_wierzcho³ka_koñcowego_krawêdzi przepustowoœæ_krawêdzi');
+    display('Linia 2: c Opis parametrï¿½w podanych w celu wytworzenia grafu');
+    display('Linia 3: p kod_rodzaju liczba_wierzchoï¿½kï¿½w liczba_krawï¿½dzie');
+    display('Linia 4: n numer_wierzchoï¿½ka_poczï¿½tkowego s');
+    display('Linia 5: n numer_wierzchoï¿½ka_koï¿½cowego t');
+    display('Linia 6 i kolejne: a numer_wierzchoï¿½ka_poczï¿½tkowego_krawï¿½dzi numer_wierzchoï¿½ka_koï¿½cowego_krawï¿½dzi przepustowoï¿½ï¿½_krawï¿½dzi');
     return;
 end
 end

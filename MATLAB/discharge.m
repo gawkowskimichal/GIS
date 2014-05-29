@@ -1,4 +1,6 @@
 function [ F,excess,seen,height ] = discharge( C, F, excess, height, seen, u, n, INF )
+    %discharge - modyfikuje wierzchołek aktywny aplikujac na nim operacje push i relabel
+    %aż do momentu, gdy stanie się on nieaktywny
     while (excess(u) > 0)
         if (seen(u) < n+1)
           v = seen(u);
