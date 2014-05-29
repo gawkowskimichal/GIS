@@ -22,7 +22,7 @@ void relabelHighestLabel(const int * const * C, const int * const * F, int *heig
 }
 
 //operacja discharge - modyfikuje wierzchołek aktywny aplikujac na nim operacje push i relabel
-//aż do momentu, gdy stanie się on nieaktywny, wtedy aplikuje
+//aż do momentu, gdy stanie się on nieaktywny
 void dischargeHighestLabel(const int * const * C, int ** F, int *excess, int *height, int *seen, int u, int nodes, int & highestLabelIndex) {
 	while (excess[u] > 0) {
     if (seen[u] < nodes) {

@@ -20,7 +20,7 @@ void relabel(const int * const * C, const int * const * F, int *height, int u, i
 }
 
 //operacja discharge - modyfikuje wierzchołek aktywny aplikujac na nim operacje push i relabel
-//aż do momentu, gdy stanie się on nieaktywny, wtedy aplikuje
+//aż do momentu, gdy stanie się on nieaktywny
 void discharge(const int * const * C, int ** F, int *excess, int *height, int *seen, int u, int nodes) {
   while (excess[u] > 0) {
     if (seen[u] < nodes) {
